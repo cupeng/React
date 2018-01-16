@@ -1,0 +1,19 @@
+
+生命周期:
+
+  componentWillMount()  组件挂载前
+
+  componentDidMount() 组件挂载后
+
+  comonentWillupdate() 组件更新前
+
+  comonentDidMount() 组件更新后
+
+  componentWillUnmount 组件卸载
+
+阻止冒泡:
+
+  e.nativeEvent.stopImmediatePropagation();
+
+表单：
+  <input type="checkbox" defaultChecked />
