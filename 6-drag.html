@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+	<style>
+		.box{
+			width:200px;
+			height:200px;
+			background:red;
+			position:relative;
+		}
+	</style>
+	</head>
+<body>
+	<div id="app"></div>
+	<script type="text/babel">
+		class Drag extends React.Component{
+			constructor(){
+				super();
+				this.state = {
+					left:0,
+					top:0
+				}
+				this.X = 0;
+				this.Y = 0;
+			}
+			fnDown=(e)=>{
+				this.X = e.pageX - e.target.offsetLeft;
+				this.Y = e.pageY - e.target.offsetTop;
+				
+				document.onmousemove = this.fnMove;
+				document.onmouseup = this.fnUp;
+			}
+			fnMove=(e)=>{
+				console.log(this.state.left,this.state.top);
+				this.setState({
+					left:e.pageX - this.X,
+					top:e.pageY - this.Y
+				})
+				
+			}
+			fnUp=(e)=>{
+				document.onmousemove = null;
+			}
+			render(){
+				return (<div>
+					<div onMouseDown={this.fnDown} style={{left:this.state.left,top:this.state.top}} className="box"></div>
+				</div>)
+			}
+		}
+		ReactDOM.render(
+			<Drag />,
+			document.querySelector("#app")
+		)
+	</script>
+</body>
+</html>
