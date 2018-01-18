@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+	<style>
+		.box{
+			width:200px;
+			height:200px;
+			background:yellow;
+		}
+	</style>
+</head>
+<body>
+	<div id="app"></div>
+	<script type="text/babel">
+		class Toggle extends React.Component{
+			constructor(){
+				super();
+				this.state = {
+					onOff:true
+				}
+			}
+			toggle=()=>{
+					this.setState({
+						onOff:!this.state.onOff
+					})
+				
+			}
+			render(){
+				let showStr = this.state.onOff?'block':'none';
+				return (<div>
+					<input onClick={this.toggle} type="button" value="按钮" />
+					<div className="box" style={{display:showStr}}></div>
+				</div>)
+			}
+		}
+		ReactDOM.render(
+			<Toggle />,
+			document.querySelector("#app")
+		)
+	</script>
+</body>
+</html>

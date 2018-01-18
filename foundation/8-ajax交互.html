@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+	</head>
+<body>
+	<div id="app"></div>
+	<script type="text/babel">
+		class MyCom extends React.Component{
+			constructor(){
+				super();
+				this.state = {
+					msg:[]
+				};
+			}
+			componentDidMount(){
+				this.fetchData();
+			}
+			fetchData(){
+				let oAjax = new XMLHttpRequest();
+				oAjax.open('GET','https://bird.ioliu.cn/joke/rand?type=text',true);
+				oAjax.send();
+				oAjax.onload = function(){
+					if(oAjax.status==200){
+						let json = JSON.parse(oAjax.responseText);
+						this.setState({
+							msg:json.data
+						})
+					}
+				}.bind(this);
+			}
+			render(){
+				let arr = [];
+
+				this.state.msg.forEach((item,index)=>{
+					arr.push(<li key={index}>{item.content}</li>);
+				})
+
+				return (<div>
+					<div style={{display:this.state.msg.length>0?'none':'block'}}>暂无数据...</div>
+					<ul>{arr}</ul>
+				</div>)
+			}
+
+		}
+
+		ReactDOM.render(
+			<MyCom />,
+			document.querySelector("#app")
+		)
+	</script>
+</body>
+</html>
