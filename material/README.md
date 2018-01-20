@@ -1,9 +1,9 @@
  ## 项目介绍 ##
  
  
-     1. 本项目使用了[create-React-app][1]脚手架安装React脚手架。
-     2. 使用[material-ui][2]实现页面框架。
-     3. 使用[React-route][3]r实现页面相互的跳转。
+-  本项目使用了[create-React-app][1]脚手架安装React脚手架。
+-  使用[material-ui][2]实现页面框架。
+-  使用[React-route][3]r实现页面相互的跳转。
      
 
 
