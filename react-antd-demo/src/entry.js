@@ -1,9 +1,4 @@
 
-/**
- *
- * @authors jarson_7426@163.com
- * @date    2016-10-21 16:42:35
- */
 
 'use strict';
 

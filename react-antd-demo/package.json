@@ -11,8 +11,8 @@
     "type": "git",
     "url": ".."
   },
-  "author": "luckykun",
-  "license": "MIT",
+  "author": "",
+  "license": "",
   "devDependencies": {
     "autoprefixer": "^6.4.0",
     "babel-core": "^6.17.0",
