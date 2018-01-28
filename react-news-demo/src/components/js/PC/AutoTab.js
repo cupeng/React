@@ -1,8 +1,7 @@
 import React from 'react';
-import {Card,Tabs} from 'antd';
+import {Card} from 'antd';
 import 'whatwg-fetch';
 import {BrowserRouter,Router,Route,Link} from 'react-router-dom';
-const TabPane = Tabs.TabPane;
 
 export default class AutoTab extends React.Component {
 	constructor(){
@@ -28,16 +27,13 @@ export default class AutoTab extends React.Component {
 	render() {
 		let arr =[]; 
 		this.state.news.forEach((item,index)=>{
-			console.log(item.uniquekey);
 			arr.push(<li key={index}>
 				{item.title}
 			</li>);
 		})
 		return (
 		<div className="topNewsList">
-					<Card title={this.props.cartTitle} bordered={true} style={{
-				width: this.props.width
-			}}>
+					<Card>
 						<div style={{display:this.state.news.length>0?'none':'block'}}>暂无数据...</div>
 						<ul>{arr}</ul>
 					</Card>		

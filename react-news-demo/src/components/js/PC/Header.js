@@ -19,7 +19,7 @@ class Header extends React.Component {
 
 	}
 	handleClick = (e) => {
-		if(e.key="register"){
+		if(e.key=="register"){
 			this.setState({
 				current:'register'
 			})

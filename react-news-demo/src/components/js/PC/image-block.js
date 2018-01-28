@@ -26,20 +26,36 @@ export default class AutoTab extends React.Component {
 			})
 	}
 	render() {
+		const styleImg = {
+			display: "block",
+			width: this.props.imageWidth,
+			height: "90px"
+		};
+		const styleH3 = {
+			width: this.props.imageWidth,
+			whiteSpace: "nowrap",
+			overflow: "hidden",
+			textOverflow: "ellipsis"
+		}
 		let arr =[]; 
 		this.state.news.forEach((item,index)=>{
-			console.log(item.uniquekey);
-			arr.push(<li key={index}>
-				{item.title}
-			</li>);
+			arr.push(<div key={index} className="imageblock">
+					<div className="custom-image">
+						<img alt={item.title} src={item.thumbnail_pic_s} style={styleImg} />
+					</div>	
+					<div className="custom-card">
+						<h3 style={styleH3}>{item.title}</h3>
+						<p style={styleH3}>{item.author_name}</p>
+					</div>
+				</div>);
 		})
 		return (
 		<div className="topNewsList">
 					<Card title={this.props.cartTitle} bordered={true} style={{
 				width: this.props.width
-			}}>
-						<div style={{display:this.state.news.length>0?'none':'block'}}>暂无数据...</div>
-						<ul>{arr}</ul>
+			}}>	
+						<div style={{display:this.state.news.length>0?'none':'block'}}></div>
+						{arr}
 					</Card>		
 		</div>)
 	}
