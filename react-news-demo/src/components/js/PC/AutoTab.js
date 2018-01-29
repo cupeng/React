@@ -28,7 +28,9 @@ export default class AutoTab extends React.Component {
 		let arr =[]; 
 		this.state.news.forEach((item,index)=>{
 			arr.push(<li key={index}>
-				{item.title}
+				<Link to={`details/${item.uniquekey}`} target="_blank">
+					{item.title}
+				</Link>
 			</li>);
 		})
 		return (

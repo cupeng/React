@@ -11,7 +11,6 @@ export default class Index extends React.Component {
 			<div>
 				<Header />
 				<Tab />
-
 				<Footer />
 			</div>)
 	}

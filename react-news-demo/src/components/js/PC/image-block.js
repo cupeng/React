@@ -40,14 +40,16 @@ export default class AutoTab extends React.Component {
 		let arr =[]; 
 		this.state.news.forEach((item,index)=>{
 			arr.push(<div key={index} className="imageblock">
-					<div className="custom-image">
-						<img alt={item.title} src={item.thumbnail_pic_s} style={styleImg} />
-					</div>	
-					<div className="custom-card">
-						<h3 style={styleH3}>{item.title}</h3>
-						<p style={styleH3}>{item.author_name}</p>
-					</div>
-				</div>);
+						<Link to={`details/${item.uniquekey}`} target="_blank">
+							<div className="custom-image">
+								<img alt={item.title} src={item.thumbnail_pic_s} style={styleImg} />
+							</div>	
+							<div className="custom-card">
+								<h3 style={styleH3}>{item.title}</h3>
+								<p style={styleH3}>{item.author_name}</p>
+							</div>
+						</Link>
+					</div>);
 		})
 		return (
 		<div className="topNewsList">

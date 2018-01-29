@@ -1,12 +1,14 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import Card from './Card';
+import Banner1 from './Banner';
 const TabPane = Tabs.TabPane;
 export default class Tab extends React.Component {
 	render() {
 		return (<div>
 				<Tabs>
 			      <TabPane tab="头条" key="1">
+			      	  <Banner1 />
 			      	  <Card count={8} type="top"  />
 			      </TabPane>
 			      <TabPane tab="社会" key="2">

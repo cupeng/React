@@ -33,3 +33,9 @@ html{
 	margin-top: 0.3rem;
 	color: #2db888;
 }
+.banner{
+  width: 100%;
+}
+.banner img{
+  width: 100%;
+}
