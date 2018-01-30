@@ -42,10 +42,17 @@ export default class Users extends React.Component {
 	}
 	render() {
 		const {usercollection} = this.state;
+		const {usercomments} = this.state;
 		let arrLi = [];
 		const usercollectionList = usercollection.forEach((item,index)=>{
-			console.log(item);
 				arrLi.push(<Card key={index} title={item.Title} extra={<a href={`/details/${item.uniquekey}`}>查看</a>}></Card>);
+		});
+		let arr = [];
+		const usercommentsList = usercomments.forEach((item,index)=>{
+			console.log(item);
+				arr.push(<Card key={index} title={`您于${item.datetime}评论了文章`} extra={<a href={`/details/${item.uniquekey}`}>查看</a>}>
+					<p>{item.Comments}</p>
+				</Card>);
 		});
 		return (<div>
 			<Header />
@@ -59,7 +66,9 @@ export default class Users extends React.Component {
 							</div>
 						</TabPane>
 						<TabPane tab="我的评论列表" key="2">
-							
+							<div>
+								{arr}
+							</div>
 						</TabPane>
 						<TabPane tab="头像设置" key="3">
 							
