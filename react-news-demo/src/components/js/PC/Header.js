@@ -3,6 +3,7 @@ import { Row,Col,Menu,Modal,Icon,message,Form,Tabs,Input,Button,CheckBox} from '
 import Logo from '../../img/logo.png';
 import 'whatwg-fetch';
 import {Link} from 'react-router-dom';
+import Users from './Users';
 const FormItem = Form.Item;
 const TabPane = Tabs.TabPane;
 class Header extends React.Component {
@@ -86,7 +87,7 @@ class Header extends React.Component {
 		<Menu.Item key="logout" className="register">
 					<Button type="primary" htmlType="button">{this.state.userNickName}</Button>
 					&nbsp;&nbsp;
-					<Link target="_blank" to={`/usercenter`}>
+					<Link target="_blank" to={`/Users`}>
 						<Button type="dashed" htmlType="button">个人中心</Button>
 					</Link>
 					&nbsp;&nbsp;

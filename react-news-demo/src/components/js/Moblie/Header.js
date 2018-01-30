@@ -18,6 +18,30 @@ class Header extends React.Component {
 		};
 
 	}
+	componentWillMount(){
+		if (localStorage.userid!='') {
+			this.setState({hasLogined:true});
+			this.setState({userNickName:localStorage.userNickName,userid:localStorage.userid});
+		}
+	};
+	handleClick = (e) => {
+		if(e.key=="register"){
+			this.setState({
+				current:'register'
+			})
+			this.cencle();
+		}else{
+			this.setState({
+				current:e.key
+			});
+		}
+		
+	}
+	cencle = () =>{
+		this.setState({
+			modalVisible:true
+		})
+	}
 	setModalVisible = () =>{
 		this.setState({
 			modalVisible:false
@@ -26,27 +50,41 @@ class Header extends React.Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		let formData = this.props.form.getFieldsValue();
-		axios.get("http://newsapi.gugujiankong.com/Handler.ashx?action=" + this.state.action
+		fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=" + this.state.action
 		+ "&username="+formData.userName+"&password="+formData.password
 		+"&r_userName=" + formData.r_userName + "&r_password="
 		+ formData.r_password + "&r_confirmPassword="
-		+ formData.r_confirmPassword).then(res=>{
-			this.setState({
-				userNickName:res.data.NickUserName,
-				userid:res.data.NickUserName
-			});
-			message.success("请求成功");
-		})
-	}
-	login = () =>{
-		this.setState({
-			modalVisible:true
-		})
-	}
+		+ formData.r_confirmPassword)
+		.then(response => response.json())
+		.then(json => {
+			this.setState({userNickName: json.NickUserName, userid: json.UserId});
+			localStorage.userid= json.UserId;
+			localStorage.userNickName = json.NickUserName;
+		});
+		if (this.state.action=="login") {
+			this.setState({hasLogined:true});
+		}
+		message.success("请求成功！");
+		this.setModalVisible(false);
+	};
+	callback(key) {
+		if (key == 1) {
+			this.setState({action: 'login'});
+		} else if (key == 2) {
+			this.setState({action: 'register'});
+		}
+	};
+	logout(){
+		localStorage.userid= '';
+		localStorage.userNickName = '';
+		this.setState({hasLogined:false});
+	};
 	render() {
 		let {getFieldProps} = this.props.form;
 		const userShow = this.state.hasLogined?
-			<Icon type="inbox" />
+			<Link to={`/Users`}>
+					<Icon type="inbox"/>
+				</Link>
 		: <Icon type="setting"  onClick={this.login} />
 		return (<div id="mobileheader">
 			<header>

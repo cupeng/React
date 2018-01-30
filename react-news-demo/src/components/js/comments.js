@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row,Col,Menu,Modal,Icon,message,Form,Tabs,Input,Button,CheckBo,Card} from 'antd';
+import {notification, Row,Col,Menu,Modal,Icon,message,Form,Tabs,Input,Button,CheckBo,Card} from 'antd';
 import 'whatwg-fetch';
 import {Link} from 'react-router-dom';
 const FormItem = Form.Item;
@@ -35,6 +35,12 @@ class Comments extends React.Component {
 				this.componentDidMount();
 			})
 	}
+	addUserColletion = () =>{
+		fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=uc&userid=" + localStorage.userid + "&uniquekey=" + this.props.uniquekey).then(response => response.json()).then(json => {
+			//收藏成功以后进行一下全局的提醒
+			notification['success']({message: 'ReactNews提醒', description: '收藏此文章成功'});
+		});	
+	}
 	render() {
 		let {getFieldProps} = this.props.form;
 		const {comments}  = this.state;
@@ -55,6 +61,8 @@ class Comments extends React.Component {
 							<FormItem label="您的评论">
 								<Input type="textarea" placeholder='随便写' {...getFieldProps('remark',{initalValue:''})} />
 								<Button type="primary" htmlType="submit">提交评论</Button>
+								&nbsp;&nbsp;
+								<Button type="primary" onClick={this.addUserColletion} htmlType="button">收藏文章</Button>
 							</FormItem>
 						</Form>
 					</Col>
