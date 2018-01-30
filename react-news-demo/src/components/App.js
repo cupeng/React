@@ -4,6 +4,7 @@ import 'antd/dist/antd.css';
 import MediaQuery from 'react-responsive';
 import PC_index from './js/PC';
 import MO_index from './js/Moblie';
+import MO_details from './js/Moblie/Detail';
 import PC_details from './js/PC/Detail';
 
 export default class App extends React.Component {
@@ -18,7 +19,12 @@ export default class App extends React.Component {
 				</Router>
 			</MediaQuery>
 			<MediaQuery query='(max-device-width:1224px)'>
-				<MO_index />
+				<Router>
+					<div>
+						<Route exact path="/" component={MO_index}></Route>
+						<Route path="/details/:uniquekey" component={MO_details}></Route>
+					</div>
+				</Router>
 			</MediaQuery>					
 		</div>)
 	}

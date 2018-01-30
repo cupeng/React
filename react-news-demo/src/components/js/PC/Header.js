@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row,Col,Menu,Modal,Icon,message,Form,Tabs,Input,Button,CheckBox} from 'antd';
 import Logo from '../../img/logo.png';
-import axios from 'axios';
+import 'whatwg-fetch';
 import {Link} from 'react-router-dom';
 const FormItem = Form.Item;
 const TabPane = Tabs.TabPane;
@@ -18,6 +18,12 @@ class Header extends React.Component {
 		};
 
 	}
+	componentWillMount(){
+		if (localStorage.userid!='') {
+			this.setState({hasLogined:true});
+			this.setState({userNickName:localStorage.userNickName,userid:localStorage.userid});
+		}
+	};
 	handleClick = (e) => {
 		if(e.key=="register"){
 			this.setState({
@@ -44,37 +50,52 @@ class Header extends React.Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		let formData = this.props.form.getFieldsValue();
-		axios.get("http://newsapi.gugujiankong.com/Handler.ashx?action=" + this.state.action
+		fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=" + this.state.action
 		+ "&username="+formData.userName+"&password="+formData.password
 		+"&r_userName=" + formData.r_userName + "&r_password="
 		+ formData.r_password + "&r_confirmPassword="
-		+ formData.r_confirmPassword).then(res=>{
-			this.setState({
-				userNickName:res.data.NickUserName,
-				userid:res.data.NickUserName
-			});
-			message.success("请求成功");
-		})
-	}
+		+ formData.r_confirmPassword)
+		.then(response => response.json())
+		.then(json => {
+			this.setState({userNickName: json.NickUserName, userid: json.UserId});
+			localStorage.userid= json.UserId;
+			localStorage.userNickName = json.NickUserName;
+		});
+		if (this.state.action=="login") {
+			this.setState({hasLogined:true});
+		}
+		message.success("请求成功！");
+		this.setModalVisible(false);
+	};
+	callback(key) {
+		if (key == 1) {
+			this.setState({action: 'login'});
+		} else if (key == 2) {
+			this.setState({action: 'register'});
+		}
+	};
+	logout(){
+		localStorage.userid= '';
+		localStorage.userNickName = '';
+		this.setState({hasLogined:false});
+	};
 	render() {
 		let {getFieldProps} = this.props.form;
 		const userShow = this.state.hasLogined
 		?
 		<Menu.Item key="logout" className="register">
-			<Button type="primary" htmlType="button">
-				{this.state.userNickName}
-			</Button>
-			&nbsp;&nbsp;
-			<Link target="_blank">
-				<Button type="dashed" htmlType="button">个人中心</Button>
-			</Link>
-			&nbsp;&nbsp;
-			<Button type="ghost" htmlType="button">退出</Button>
-		</Menu.Item>
+					<Button type="primary" htmlType="button">{this.state.userNickName}</Button>
+					&nbsp;&nbsp;
+					<Link target="_blank" to={`/usercenter`}>
+						<Button type="dashed" htmlType="button">个人中心</Button>
+					</Link>
+					&nbsp;&nbsp;
+					<Button type="ghost" htmlType="button" onClick={this.logout.bind(this)}>退出</Button>
+				</Menu.Item>
 		:
-		<Menu.Item key="register" className="register">
-			<Icon type="appstore" />注册/登录
-		</Menu.Item>;
+		<Menu.Item key="register" class="register">
+				<Icon type="appstore"/>注册/登录
+			</Menu.Item>;
 		return (<header>
 				<Row>
 					<Col span={2}></Col>

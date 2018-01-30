@@ -103,10 +103,20 @@
     color: #999;
 }
 
-.register{
-  float: right !important;
+
+
+.register {
+    float: right !important;
+    padding: 0 ;
 }
 
+.ant-menu-horizontal>.ant-menu-item>a, .ant-menu-horizontal>.ant-menu-submenu>a {
+    display: inline-block !important;
+}
+
+.container{
+  padding-top: 10px;
+}
 
 
 /* footer start*/
