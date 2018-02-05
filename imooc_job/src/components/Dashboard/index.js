@@ -44,7 +44,7 @@ export default class Dashboard extends React.Component {
 				component:Msg	
 			},
 			{
-				path:'/',
+				path:'/user',
 				text:'我',
 				icon:'user',
 				title:'个人中心',

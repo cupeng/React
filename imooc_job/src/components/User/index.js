@@ -21,6 +21,7 @@ export default class User extends React.Component {
 		const Item = List.Item;
 		const Brief = Item.Brief;
 		return props.user?(<div>
+			{props.redirectTo&&props.redirectTo!='/login'?<Redirect to={props.redirectTo} />:null}
 			<Result
 			 img={<img style={{width:50}} src={require(`../AvatarSelector/images/${props.avatar}.png`)} />}
 			 title={props.user} message={props.type=='boss'?props.company:null} />

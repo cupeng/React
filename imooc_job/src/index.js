@@ -14,6 +14,7 @@ import Register from './container/Register/';
 import BossInfo from './container/BossInfo/';
 import GeniusInfo from './container/GeniusInfo/';
 import Dashboard from './components/Dashboard/';
+import Chat from './components/Chat/';
 import './index.css';
 
 const store = createStore(reducers, compose(
@@ -32,6 +33,7 @@ ReactDOM.render(
 					<Route path="/login" component={Login}></Route>
 					<Route path="/register" component={Register}></Route>
 					<Route component={Dashboard}></Route>
+					<Route path="/chat/:user" component={Chat}></Route>
 				</Switch>
 				
 			</div>
