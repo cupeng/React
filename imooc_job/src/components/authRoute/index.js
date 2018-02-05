@@ -14,10 +14,6 @@ export default class AuthRoute extends React.Component {
 	componentDidMount(){
 		const publicList = ['/login','/register'];
 		const pathname = this.props.location.pathname;
-		console.log(this.props.location);
-		if(this.props.location.pathname==='/login' && document.cookie.split("=")[0]==='userid'){
-			return;
-		}
 		if (publicList.indexOf(pathname)>-1) {
 			return null;
 		}
