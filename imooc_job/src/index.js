@@ -28,12 +28,12 @@ ReactDOM.render(
 			<div>
 				<AuthRoute />
 				<Switch>
+					<Route path="/chat/:user" component={Chat}></Route>
 					<Route path="/geniusInfo" component={GeniusInfo}></Route>
 					<Route path="/bossinfo" component={BossInfo}></Route>
 					<Route path="/login" component={Login}></Route>
 					<Route path="/register" component={Register}></Route>
 					<Route component={Dashboard}></Route>
-					<Route path="/chat/:user" component={Chat}></Route>
 				</Switch>
 				
 			</div>

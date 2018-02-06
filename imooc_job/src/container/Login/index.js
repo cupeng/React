@@ -25,17 +25,12 @@ export default class Login extends React.Component {
 	register = () =>{
 		this.props.history.push('./register');
 	}
-	handleChange(key,val){
-		this.setState({
-			[key]:val
-		})
-	}
 	handleLogin = () =>{
 		this.props.login(this.props.state);
 	}
 	render() {
 		return (<div>
-			{this.props.redirectTo?<Redirect to={this.props.redirectTo} />:null}
+			{(this.props.redirectTo&&this.props.redirectTo!='/login')? <Redirect to={this.props.redirectTo} />:null}
 			<Logo title={`用户登录`} />
 			{this.props.msg?<p className="error-msg">{this.props.msg}</p>:null}
 			<WingBlank>
