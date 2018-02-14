@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card,WingBlank} from 'antd-mobile';
+import {Card,WingBlank,} from 'antd-mobile';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 
@@ -23,9 +23,7 @@ export default class UserInfo extends React.Component {
 						</Card.Header>
 						<Card.Body>
 							{v.type=='boss'?<div>公司:{v.company}</div>:null}
-							{v.desc.split('\n').map(d=>(
-								<span key={d}>{d}</span>
-							))}
+							{v.desc.split('\n').map(d=><p key={d}>{d}</p>)}
 							{v.type=='boss'?<div>薪资:{v.money}</div>:null}
 						</Card.Body>
 			   		</Card>:null

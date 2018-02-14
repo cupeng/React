@@ -20,7 +20,7 @@ export function chat(state=initState,action){
 			return {...state,chatmsg:action.payload,unread:action.payload.filter(v=>!v.read).length}
 			break;
 		case MSG_RECV:
-			return {...state,chatmsg:[...state.chatmsg,action.payload]}
+			return {...state,chatmsg:[...state.chatmsg,action.payload],unread:state.unread+1}
 			break;
 		// case MSG_READ:
 		default:
@@ -39,15 +39,14 @@ function msgRecv(msg){
 export function recvMsg(){
 	return dispatch=>{
 		socket.on('recvmsg',(data)=>{
-			console.log('recvmsg',data);
 			dispatch(msgRecv(data));
 		})
 	}
 }
 
-export function sendMsg({form,to,msg}){
+export function sendMsg({from,to,msg}){
 	return dispatch=>{
-		socket.emit('sendmsg',{form,to,msg});
+		socket.emit('sendmsg',{from,to,msg});
 	}	
 }
 

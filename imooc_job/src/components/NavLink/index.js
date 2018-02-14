@@ -2,8 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {TabBar} from 'antd-mobile';
 import {withRouter} from 'react-router-dom';
+import { connect} from 'react-redux';
 
 @withRouter
+
+@connect(
+	state=>state
+)
 
 export default class NavLink extends React.Component {
 	static propTypes = {
@@ -15,7 +20,7 @@ export default class NavLink extends React.Component {
 		return (<div className="fixd-footer">
 			<TabBar>
 				{navList.map(v=>(
-					<TabBar.Item
+					<TabBar.Item badge={v.path=='/msg'?this.props.chat.unread:0}
 					 selected={pathname===v.path}
 					 onPress={()=>{
 					 	this.props.history.push(v.path)
