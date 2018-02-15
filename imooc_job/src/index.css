@@ -16,6 +16,15 @@
 	padding-right: 15px;
 	text-align: right;
 }
+#chat-page .am-grid-icon{
+	display: none;
+}
+.am-carousel-wrap{
+	display: none;
+}
+.am-grid .am-flexbox .am-flexbox-item .am-grid-item-content .am-grid-item-inner-content .am-grid-text{
+	margin-top: 0px !important;
+}
 .stick-footer{
 	z-index: 10;
 	position: fixed;
