@@ -10,7 +10,6 @@ import UserInfo from '../UserInfo/';
 )
 export default class Boss extends React.Component {
 	componentDidMount() {
-
 		this.props.getUserList('genius');
 	}
 	render(){

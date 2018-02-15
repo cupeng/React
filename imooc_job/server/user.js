@@ -5,7 +5,6 @@ const User = models.getModel("user");
 const utils = require("utility");
 const Chat = models.getModel("chat");
 const _filter = {'pwd':0,'__v':0};
-
 Router.get('/list',(req,res)=>{
 	const {type} = req.query;
 	User.find({type},(err,doc)=>{
@@ -21,7 +20,7 @@ Router.get('/getmsglist',function(req,res){
 		userdoc.forEach(v=>{
 			users[v._id] = {name:v.user, avatar:v.avatar}
 		})
-		Chat.find({'$or':[{from:user},{to:user}]},function(err,doc){
+		Chat.find({'$or':[{to:user}]},function(err,doc){
 			if (!err) {
 				return res.json({code:0,msgs:doc, users:users})
 			}
@@ -30,6 +29,21 @@ Router.get('/getmsglist',function(req,res){
 	})
 	// {'$or':[{from:user,to:user}]}
 
+})
+
+Router.post('/readmsg', (req,res)=>{
+	const userid = req.cookies.userid;
+	const {from} = req.body;
+	Chat.update(
+		{from,to:userid},
+		{'$set':{read:true}},
+		{'multi':true},
+		function(err,doc){
+		if (!err) {
+			return res.json({code:0,num:doc.nModified})
+		}
+		return res.json({code:1,msg:'修改失败'})
+	})
 })
 
 Router.post('/update',(req,res)=>{

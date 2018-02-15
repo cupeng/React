@@ -2,13 +2,13 @@ import React from 'react';
 import io from 'socket.io-client';
 import {InputItem,List,NavBar,Icon,Grid} from 'antd-mobile';
 import {connect} from 'react-redux'; 
-import {getMsgList,sendMsg,recvMsg} from '../../redux/chat.redux';
+import {getMsgList,sendMsg,recvMsg,readMsg} from '../../redux/chat.redux';
 import {getChatId} from '../../util';
 const socket = io('ws://localhost:9093');
 
 @connect(
 	state=>state,
-	{ getMsgList,sendMsg,recvMsg}
+	{ getMsgList,sendMsg,recvMsg,readMsg }
 )
 
 export default class Chat extends React.Component {
@@ -16,18 +16,18 @@ export default class Chat extends React.Component {
 		super(props);
 		this.state={
 			text:'',
-			msg:[],
-			showEmoji:false
+			msg:[]
 		}
 	}
 	componentDidMount(){
 		if(!this.props.chat.chatmsg.length){	
 			this.props.getMsgList();
-			this.props.recvMsg();	
+			this.props.recvMsg();
 		}
-		setTimeout(()=>{
-			window.dispatchEvent(new Event('resize'));
-		},0)
+	}
+	componentWillUnmount(){
+		const to = this.props.match.params.user
+		this.props.readMsg(to)
 	}
 	fixCarousel(){
 		setTimeout(()=>{
@@ -38,13 +38,14 @@ export default class Chat extends React.Component {
 		if(this.state.text===''){
 			return	
 		};
-		this.setState({
-			text:''
-		});
 		const from = this.props.user._id;
 		const to = this.props.match.params.user;
 		const msg = this.state.text;
 		this.props.sendMsg({from,to,msg});
+		this.setState({
+			text:'',
+			showEmoji:false
+		});
 	}
 	back =()=>{
 		this.props.history.goBack();

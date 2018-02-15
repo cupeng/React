@@ -16,7 +16,7 @@ import User from '../../components/User/';
 
 export default class Dashboard extends React.Component {
 	componentDidMount(){
-		if(!this.props.chat.chatmsg.length){		
+		if(!this.props.chat.chatmsg.length){	
 			this.props.getMsgList();
 			this.props.recvMsg();	
 		}
