@@ -8,7 +8,7 @@ import About from './About/';
 class App extends Component {
   render() {
      return (<Provider>
-            <BrowserRouter>
+            <BrowserRouter className="wrap">
                 <Switch>
                   <Route exact path="/" component={Home}></Route>
                   <Route exact path="/Book" component={Book}></Route>

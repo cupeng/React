@@ -3,6 +3,11 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.wrap{
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
 #header{
 	width: 100%;
 	position:relative;
@@ -13,18 +18,20 @@ body {
 	line-height: 64px;
 	text-align: center;
 }
-.mainWrap{
-	max-width: 980px;
-	margin: 0 auto;
-}
 #headerDivider{
 	float: left;
     margin: 10px 0;
     height: 44px;
 }
+.content{
+	flex: 1;
+	width: 100%;
+	padding: 0 50px;
+}
 .footer{
 	text-align:center;
 }
+
 #nav{
 	margin-left: 30px;
 	float: left;
@@ -39,4 +46,20 @@ body {
 	position: absolute;
     top: 0;
     right: -5%;
+}
+.mainWrap{
+	max-width: 980px;
+	margin: 0 auto;
+}
+.subNav{
+	border: 1px solid #ccc;
+	border-top: none;
+}
+.subNav a {
+    display: block;
+    text-align: center;
+    font: 14px/36px "\5B8B\4F53";
+    margin-right: -1px;
+    color: #333;
+    border-right: 3px solid transparent;
 }

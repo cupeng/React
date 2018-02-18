@@ -1,6 +1,6 @@
 import React from 'react';
 import {Layout, Row, Col, Menu, Icon, Divider, Button, Dropdown} from 'antd';
-import {NavLink, Link} from "react-router-dom";
+import { Link} from "react-router-dom";
 import '../../index.css';
 const topMenu = (
     <Menu className="dropMenu">
